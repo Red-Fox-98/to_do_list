@@ -12,26 +12,8 @@ use Symfony\Component\Routing\Attribute\Route;
 final class DefaultController extends AbstractController
 {
     #[Route('/default', name: 'blog_default')]
-    public function index(BlogRepository $blogRepository, EntityManagerInterface $em): Response
+    public function index(): Response
     {
-//        $blog = $blogRepository->findOneBy(['id' => 1]);
-////        $blog->setTitle('Title 2');
-//        $em->remove($blog);
-//        $em->flush();
-//        exit();
-
-
-        $blog = (new Blog())
-            ->setTitle('Blog')
-            ->setDescription('Blog description')
-            ->setText('Blog text')
-        ;
-
-        $em->persist($blog);
-        $em->flush();
-
-        return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
+        return $this->redirectToRoute('app_blog_index');
     }
 }
